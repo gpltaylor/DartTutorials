@@ -1,0 +1,162 @@
+<h2>Dart Basics</h2>
+<p>Dart is a scripting language that's designed and developed by the great Google Team. The main focus is to produce a reliable 
+  scripting language that follows the more modern approch to writting code. Things have changed since the days of Netscape, 
+  but Javascript has remained under cover. If you ask the Google Team they will deny that Dart is designed to replace Javascript, 
+  however after spending some time writting the language you will be able to see why it could.
+</p>
+<p>
+  So lets get started, fireup <a href="http://www.dartlang.org/" taget="_blank">DartLang.org</a> or open your Dart IDE and lets get hacking!
+</p>
+<h3>A String is for Life not just Christmas</h3>
+<p>
+in order to work in any language you first must understand how to deal with Strings. However it’s important to understand a key 
+  point about them. A string is for life and not just for christmas. We call this immutable when we are trying to be clever dicks. 
+  What this basically means is that when you make a string, it’s forever. if you edit the string you have basically thrown away the 
+  old string a created a new one. For this reason it tends to be hard work dealing with them. however we do get a few cool features 
+  that Google Dart provide to us.
+</p><h3>Strings</h3>
+<p>Strings are all around us and in Dart they are jam packed with extra goodness! Offering options to uppercase, lowercase, chop and 
+  replace. All the main ingredients for making a nice string edible.</p>
+<pre class="sh_javascript">
+main() {
+  String a = "Hellow World 1";
+  String b = 'Hello World 2';
+  var c = "Hello World 3";
+  print('$a');
+  print('$b');
+  print('$c');
+}
+</pre>
+
+Produces the following output
+<pre class="sh_javascript">
+Hellow World 1
+Hello World 2
+Hello World 3 
+</pre>
+
+<p>
+  As you can see from the sample above you are able to produce a string in a number of ways but all are perfectly legal. 
+  Anyone familiar with programming will take issue with "Hello World 2" as most lanuages take the ' ' to indicate a single character and 
+  should therefore not compile, or should produce 'H' as the output.<br>
+Dart also gives you the option to lazy load variables using the "var" reserved word. This allows you to create a non-type variable that 
+  can hold any variable be it a string, int or custom object.
+
+</p><h3>String Arrays</h3>
+<p>Strings can be accessed using an array notation. Allowing you to grab a single charactor from a given location. However note that this 
+  starts from "0". 
+In other words, to get the first character you must use test[0] and to get the fourth charactor you must used test[3].
+</p>
+<pre class="sh_javascript">
+main() {
+  string test = "123456789";
+  string test1 = test[1];
+  print('$test1');
+}
+</pre>
+
+Produces the following output
+<pre class="sh_javascript">
+2
+</pre>
+
+<h3>Comparing Dart Strings</h3>
+<p>
+Comparing strings can sometimes be an odd concept. Are you comparing the value or the object themselves.
+For example, if someone takes your front door off the hinges and brings it to you and asks "Is this your door?" You would reply "Yes, what 
+  the hell are you doing with my door!!!"
+<br>
+In this example you have compared that the door is the same (your real door). However someone could get a door of the same type and ask you 
+  is this your door. You would reply "no".
+<br>
+What am I getting at here??? Sometimes you need to be able to check if things are the same. You can have multiple variables all pointing 
+  to the same thing, therefore they are all equal (they are the same door), however you can also have multiple doors all with different colours.
+</p>
+<h3>Fig 1.1</h3>
+<p class="pull-left row">
+<img src="images/GoogleDartStrings.png" class="pull-right">
+The following tries to explain my wild rambling. Consider the following variables. We have two squares and one circle. 
+  Each item has a value A or B.
+You can see that the logic shows that circle A is the same as circle A (obvious). However based on what you are trying to compare, 
+  A circle may also be the same as a square. This is because one is comparing the object, whilst the other is simply comparing the value.
+Now for the reason I bring this up is that I hear a lot of chatter on the Dart forums about this issue. Dart currently does not support the 
+testing for equality where the object/variable is tested to see if it’s the same item.</p>
+<p>
+If I am right, this is an interesting point. The Dart Language will be limited by Javascript and any updates to Dart have to pay close 
+backwards compatibility to Javascript. This make designing/developing Dart core lang that little bit more complicated.
+</p>
+<pre class="sh_javascript">
+main() {
+  String a = "Hello world";
+  String b = "Hello world";
+  print(a == b);
+}
+</pre>
+<pre class="sh_javascript">
+true
+</pre>
+<h3>Comparing String</h3>
+<p>Here is a basic Dart String comparison. It shows how string can be compared to each other. Note that unlike other languages like PHP you 
+  can not compare the value of two different types. For example a String with the value "1" will not be equal to an int with the value 1.<br>
+Also note that the stringToInt is for this very basic example and should NOT be used in your code.<br>
+To convert a String to an int you should use Math.parseInt(String value)<br>
+When I think about the logic of how the variable types are created (int/String) it makes sense that parseInt was put in the Math class instead 
+  of being a method of String.<br>
+You don't want to increase the memory used by every string to include this method, also an int is trying to act like a primative value... 
+  We will have more on this later on.
+</p>
+<pre class="sh_javascript">
+main() {
+  String a = "1";
+  String c = "1";
+  int b = 1;
+  print(stringToInt(a)==b);
+  print(a==b);
+  print(a==c);
+}
+
+int stringToInt(String value) {
+  return value.charCodeAt(0)-48;
+}
+</pre>
+
+<pre class="sh_javascript">
+true
+false
+true 
+</pre>
+
+<h3>Compare String</h3>
+<p>Sometimes checking if two string have the same value is great, but not enought. You want to compare if the string is bellow our above.<br>
+The reason we might want to do this is to store the string into an array,database, XML file in order. This helps retreaving the data quickly.<br>
+The following example show how strings can be compared where the result outputs an number.<br>
+-1 means that the string is less than<br>
+0 means that the string is equal<br>
+1 means that teh string is great than
+<pre class="sh_javascript">
+main() {
+  String input1 = "a";
+  String input2 = "b";
+  compare(input1, input2);
+  
+  input1 = "b";
+  compare(input1, input2);
+  
+  input1 = "c";
+  compare(input1, input2);
+}
+
+void compare(String input1, String input2) {
+  print( "input1 compare input2 = " +  input1.compareTo(input2));
+}
+</pre>
+
+<pre class="sh_javascript">
+input1 compare input2 = -1
+input1 compare input2 = 0
+input1 compare input2 = 1
+</pre>
+<p>For new programmers this might seam a little odd, how can you compare strings? The answer is that all string are really numbers 
+  represented by the ASCII Table. 
+This maps characters to numbers. 97 is a, 98 is b and 99 is c, therefore a (97) is less than b (98).
+</p>

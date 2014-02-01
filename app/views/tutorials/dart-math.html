@@ -1,0 +1,62 @@
+<h2>Dart Math</h2>
+<p>In the revious tutorial we showed you how to deal with int values. We even showed you how to do some basic math. However to do anything serious we need to do a little more work. 
+When dealing with graphics it's common to work with trigonometry. None of us want to go back to school to re-learn this stuff, luckly we don't have to as Google Dart has a load of useful Math 
+tools build in. The item (Known as a class) is aptly named Math.
+</p><h3>Cosine</h3>
+<p>Returns the angle whose cosine is the specified number.
+<pre class="sh_javascript">
+main() {
+  double x = 0.03;
+  num myNum = Math.acos(x); 
+  print(myNum.toDouble());
+}
+</pre>
+<p>
+<pre class="sh_javascript">
+1.5407918249714196
+</pre>
+<p>Apart from the core Math there is a lot going on here... where did this Math thing came from? Read our Classes tutorial to find out the answers.</p>
+  
+<h3>String to Int</h3>
+<p>Dart has the ability to convert a String to an Int value. This is very useful when dealing with web controls like text boxes that are normally incapible of being type bound. However this method is 
+lacking any usefulness. Only being able to convert a int (whole number) if the format of the string is perfect. The following example will work.
+</p>
+<pre class="sh_javascript">
+main() {
+  String x = "120";
+  print(Math.parseInt(x));
+}
+</pre>
+
+<p>However the following will not work. This is a big disapointment as String to Int, String to Double is something that's universal in all other languages.
+<pre class="sh_javascript">
+main() {
+  String x = "120.00"; // Fails as this is not a whole number
+  String x = "£120"; // Fails as it does not allow for none numerics within the string (Including the dot!)
+  print(Math.parseInt(x)); 
+}
+</pre>
+
+<p>The above code will fail with the following output.
+<pre class="sh_javascript">
+Unhandled exception:
+BadNumberFormatException: '£120'
+ 0. Function: 'MathNatives._parseInt@924b4b8' url: 'bootstrap_impl' line:1682 col:3
+ 1. Function: 'MathNatives.parseInt' url: 'bootstrap_impl' line:1667 col:47
+ 2. Function: 'Math.parseInt' url: 'bootstrap' line:3841 col:58
+ 3. Function: '::main' url: 'file:/home/gizard/Apps/Dart/MathTest.dart' line:3 col:22
+</pre>
+
+<h3>String to Double</h3>
+<p>Math also has the ablility to convert a String to a Double. 
+<pre class="sh_javascript">
+main() {
+  String x = "120.00";
+  print(Math.parseDouble(x));
+}
+</pre>
+
+<h3>Conclusion</h3>
+<p>This makes me feel that programmers for Dart will start to get lazy and only create/use double. int seam to be simply too limiting. 
+The Math class has some useful functionality but there are a core of other useful Math options that are missing. Sign, Pi and decimal place rounding options all seam to be absent.
+</p>

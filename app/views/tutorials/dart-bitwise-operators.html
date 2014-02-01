@@ -1,0 +1,110 @@
+<h2>Bitwise Operators</h2>
+<p>OK, we are getting a little serious now. If you don't understand this don't worry too much. I have been programming since I was 6 years old and I have never had a use for bitwise operators.<br>
+That was a big statement to make, if bitwise operators are so useless why bother? The answer is becuase they are very, very fast compared to other methods. Doing Math on double types takes a lot of 
+processing, if you are dealing with large scale operations like physics calculation your program may take over 10 times the time to run. Using bitwise operators on large int can seriously reduce the processing time.
+  </p>
+<pre class="sh_javascript">
+main() {
+  int a;
+  int b;
+  
+  a = 10010;
+  b = 10001;
+  print(a|b);
+
+  a = 10010;
+  b = 10100;
+  print(a|b);
+
+  a = 10010;
+  b = 10010;
+  print(a|b);
+}
+</pre>
+<p>This output shows the results from doing a bitwise OR on the values. It's very easy to look at this an a number, for example 10,010 could be ten thousand and ten. 
+however you should look at them as being a list of 0 and 1. Here you can follow some logic.<br>
+A: 10010<br>
+B: 10001<br>
+c: 10011<br>
+</p><p> If you look at this in columns you can see that A1 has the value 1, A2 has the value 0. Therefore is A1 equal to 1, yes, therefore we place a 1<br>
+Is A2 equal to 1, No, is B2 equal to 1, no, therefore C2 equals 0.<br>
+Is A4 equal to 1, yes, therefore C4 equals 1.
+</p><p>
+<pre class="sh_javascript">
+10011
+10110
+10010
+</pre>
+<h3>Shift bitwise in Dart</h3>
+<p>Dart allows for bitwise operation (left/Right) on int variables. Remember our "OR" operator, this works by moving the value off to the left or right.<br>
+For example 10000000000 will become 01000000000 as we have moved the 1 to the right. This reduces the value from 1024 to 512. This is an amazingly quick way to divide by 2 as the CPU has very little to do.
+</p>
+<pre class="sh_javascript">
+main() {
+  int a;
+  a = 1024;
+  print(a);
+  print(a&gt;&gt;1);
+  print(a&gt;&gt;2);
+  print(a&gt;&gt;3);
+  print(a&gt;&gt;4);
+  print(a&gt;&gt;5);
+  print(a&gt;&gt;6);
+  print(a&gt;&gt;7);
+  print(a&gt;&gt;8);
+  print(a&gt;&gt;9);
+  
+  a=1;
+  print(a);
+  print(a&lt;&lt;1);
+  print(a&lt;&lt;2);
+  print(a&lt;&lt;3);
+  print(a&lt;&lt;4);
+  print(a&lt;&lt;5);
+  print(a&lt;&lt;6);
+  print(a&lt;&lt;7);
+  print(a&lt;&lt;8);
+  print(a&lt;&lt;9);
+}
+</pre>
+<p>
+<pre class="sh_javascript">
+1024
+512
+256
+128
+64
+32
+16
+8
+4
+2
+1
+2
+4
+8
+16
+32
+64
+128
+256
+512
+1024
+</pre>
+<p>Anyone who has delt with computer memmory will reconise these values. When you buy memory it will be in this range.
+</p><h3>Negative Numbers</h3>
+<p>Sometimes you want to convert a negative number to a positive value. This can happen when calculating a loan repayment. As the repayment is a negative number most consumers don't understand this concept, so the value is converted to a positive value.
+Google Dart has two methods for doing this, nagate (make something a negative number) and Abs for making something an absolute number.
+</p>
+<pre class="sh_javascript">
+main() {
+  int x = 5;
+  print (x.negate());
+  print (x.negate().abs());
+}
+</pre>
+<pre class="sh_javascript">
+-5
+5
+</pre>
+<p>When using the Google Dart IDE it shows a warning that negate is not a member of int. This looks like a bug as it's clearly within their API and it runs!</p>

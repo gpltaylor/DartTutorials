@@ -1,0 +1,82 @@
+<h2>Dart Integers</h2>
+<p>Every programming lanuage needs to be able to hold and manipulate numbers. Dart have created a variable type call int (Note the lowercase <b>i</b>nt).<br>
+There are very common options like adding, subtracting and dividing however Dart offers more functionality built into this type. The ability to shift and managed rounding is all built in.
+</p><h3>Dart int Example</h3>
+<p>The following example shows how google dart handles numbers and how multiplication and addition works. The key thing to remember is that programming languages do not calculate based on the order written.<br>
+Consider the second line from the bottom, you would expect this to produce the value 6. However this is 5. What has it done?<br>
+Google Dart places a priority order to math operators and multiplication has higher priority than addition.
+
+<pre class="sh_javascript">
+main() {
+  int a = 1;
+  int b = 2;
+  print(a);
+  print(a+b);
+  print(a+b*b);
+  print((a+b)*b);
+}
+</pre>
+<p>Produces the following output
+<pre class="sh_javascript">
+1
+3
+5
+6
+</pre>
+
+<p>As you can see, the value 5 is based on b*b+a due to the fact that Dart will do the multiplication fist. The main reason why this occures is to reduce the risk of lossing percision.
+Now it's almost impossible to lose data when you deal with int value. Large scale Math normally work with large int and do a division to work out the floating point range. However Dart 
+allows int to hold values normally assign for the type double. I have sent a request of to the Google Team to try and find out why they have allowed this.
+<pre class="sh_javascript">
+main() {
+  int a = 1.3;
+  int b = 2.225;
+  print(a);
+  print(a+b);
+  print(a+b*b);
+  print((a+b)*b);
+}
+</pre>
+<p>Becuase the variable is an int (Whole numbers for example 1,4,605,3504) the results should be identical to that above however I was shocked to find the following output.
+<pre class="sh_javascript">
+1.3
+3.5250000000000004
+6.250625
+7.8431250000000015
+</pre>
+<p>Google Dart allows you to input float/double values (for example 2.405, 4.605, 11103.1) into an int variable and the math is performed on the float. <br>
+You do get a warning saying "double is not assignable to an int" however it still runs and produces output. Other languages (for example C#) can only output a value based on the input types. So if the Math in done on an int, only an int can be produced.
+<pre class="sh_javascript">
+main() {
+  int a = 5;
+  int b = 2;
+  int c = 0;
+  c = a/b;
+  print(a/b);
+  print(c);
+}
+</pre>
+<p>Even though the variable that holds the answer (c) is an int it still produced a double value (2.5). You even get a warning "double is not assignable to an int". 
+Consider if a held the value 2... There would not be a problem, however you would still get the error. For this reason, if you want to do anything useful you need to use double and for large scale Math this is not good (in my opinion).
+</p><h3>Rounding Output</h3>
+<p>From time to time you want to round a value up, so 2.60 becomes 3 and round down (floor) becomes 2. This is used within the Finance industry to different points for example an IRR or monthly rate might be rounded up or rounded down at different points in the calculations.
+<pre class="sh_javascript">
+main() {
+  double a = 5.0;
+  double b = 2.0;
+  int c = 0;
+  c = a/b;
+  print(a/b);
+  print(c);
+  print(c.round());
+  print(c.floor());
+}
+</pre>
+<p>The output shows how the round/floor works on the value, however it got me thinking as you why you would want to round/floor an int value. If you have an int with the value 5, rounding/flooring would have no impact on the value. 
+For this reason if you need to use any of the built in int functionality you need to be using a double!
+<pre class="sh_javascript">
+2.5
+2.5
+3.0
+2.0
+</pre>

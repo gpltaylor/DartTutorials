@@ -1,0 +1,29 @@
+<section class="container">
+  <div class="pull-left">
+    <img src="/images/google-dart-tutorials-logo.png" class="pull-left"/>
+    <ul class="nav navbar-nav" data-bind="foreach: router.navigationModel" style="padding-top: 15px;">
+      <li data-bind="css: { active: isActive }"><a data-bind="attr: { href: hash }, html: title"></a></li>
+    </ul>
+  </div>  
+  <div class="pull-right">
+    <form class="pull-right navbar-form" data-bind="submit:search">
+      <input type="text" class="search-query form-control" placeholder="Search">
+    </form>
+  </div>  
+</section>
+
+<section class="container">
+  <div data-bind="router: { transition:'entrance', cacheViews:true }"></div>
+</section>                                                                  
+<section style="background-color: #efefef; height: 30px; margin-top:10px; margin-bottom:10px;">
+  <div class="container text-center" style="padding-top: 5px;">
+    <a href="#">Home</a> | 
+    <a href="#Tutorials/Getting-Started">Getting Started</a> | 
+    <a href="#Tutorials">Tutorials</a>
+  </div>
+</section> 
+
+<section class="container" style="text-align: center;">
+  Our goal is to improving the experience for all by educating the chosen few to be utilitarianistic with their knowledge.<br/> 
+  To take what they know to help improve the current norms of online experiences.
+</section>
