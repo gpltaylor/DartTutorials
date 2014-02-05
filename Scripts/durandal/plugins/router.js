@@ -136,6 +136,7 @@ define(['durandal/system', 'durandal/app', 'durandal/activator', 'durandal/event
             activeItem = activator.create();
 
         var router = {
+            routeStringToRegExp: routeStringToRegExp,
             /**
              * The route handlers that are registered. Each handler consists of a `routePattern` and a `callback`.
              * @property {object[]} handlers
