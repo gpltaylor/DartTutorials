@@ -1,0 +1,165 @@
+﻿<h2>Dart Class Tutorial</h2>
+<p>I don’t want to teach you how to program, there are better books, people and websites than myself for this. However I do want to give you a basic break down before you continue down the road of Dart Classes. Even if you’re an experienced OOP expert, I recommend you read this.</p>
+<h3>What is a Class</h3>
+<p>
+    A class is a container, you put stuff in it. Like all containers you try your best to put the same type of thing in each one. You might have loads of containers but you’re picky about what goes in them. You might even have a few jars around the house full of pennies, these are containers.
+A Phone book is a container, you put people's contact details in it. The TV Guide is a container, someone, somewhere has put in what times your favorite programs are on. These are all container and they are all possible classes.
+</p>
+<p>
+    Lets look at a phone book, it contains first name, surname and the phone number. Some people with OCD might even have their birthday and other contact numbers like a mobile. Your phone book has lots of pages, each page has the same blank information. It’s up to you to add your contact details. This is a class, it’s a page with some predetermined information that you fill out.
+</p>
+
+<h3>What’s the point in Classes</h3>
+<p>
+    When you write a computer program you don’t just write one class. Normal programs can have thousands of different classes. Think of your home, if you have more than one of the same thing (remotes, phones, cars) then you need a class to hold the information. Doing it any other way would be almost impossible.
+Once you have a class you can do cools stuff with the data almost automatically. If you’re popular you might have over 200 friends. That’s a lot of birthdays! Using a class you can automatically calculate how many days there are until each friends birthday. You can even order your address book so the first page show whose birthday it is today. Your data is now useful and your class has a reason to exist beyond data encapsulation!
+</p>
+
+<h3>Dart Class</h3>
+<p>
+    Dart has support for classes and I am happy to say that they have gone down a property style approach to adding data to a container.
+Let us think of our address book, we have a person we want to add. We want to be able to find them using their name. So we need a container that support a string that stores their first name.
+We need a way of creating the container and adding/editing the persons name.
+</p>
+
+<h3>Our First Dart Class</h3>
+<pre class="sh_javascript">
+class Person {
+ String _firstName;
+
+ void set firstName(String value) {
+    this._firstName = value;
+ }
+
+ String get firstName {
+    return this._firstName;
+ }
+}
+</pre>
+
+<p>
+    This example shows you how to create a class that holds a container for a Person. A Person has some information called First Name. We need to be able to get (read) and set (write) the information. To do this we have a property style method that allows us to access the information.
+</p>
+
+<pre class="sh_javascript">
+main() {
+ Person person = new Person();
+ Person person1 = new Person();
+
+ person.firstName = "Garry";
+ person1.firstName = "Paul";
+
+ print("Hello " + person.firstName);
+ print("Hello " + person1.firstName);
+}
+</pre>
+
+
+<pre class="sh_javascript">
+Hello Garry
+Hello Paul
+</pre>
+
+<p>
+We can see that we have created two Persons (yes I really did say Persons), and each object has it’s own unique value. We could create millions of these object and all the information within them will be safe and secure!
+Note: We can also access the values directly using the following
+</p>
+<pre class="sh_javascript">
+    print("Hello " + person._firstName);
+</pre>
+
+I strongly recommend you do not do this. Imagine if you want to format the Surname so that “Ohara” become “O’Hara” and “taylor” becomes “Taylor”. There would be no place to put this code. Your only option would be to format the surname everytime you use it. This could be millions of times! Unfortunately Dart does not support making variable private so we have to reply on programmers following this rule. This might be down to making it compatible with JavaScript however I am not sure. I have contacted the Dart team to try and find out more.
+    <!-- http://code.google.com/p/dart/issues/detail?id=3257 -->
+<p>
+    The following example tries to be more useful. Here we can see that we have the persons firstname, surname and a few contact numbers; we even have their date of birth. Now we have enough information to make something useful.
+The class is used to format the contact details, calculate the person’s age and display the person’s full name. This is now truly useful.
+</p>
+
+    <!--
+/** http://stackoverflow.com/questions/9/how-do-i-calculate-someones-age-in-c **/
+-->
+<pre class="sh_javascript">
+main() {
+ Person person = new Person();
+ person.firstName = "Garry";
+ person.surname = "Taylor";
+ person.dob = new Date(1978,06,14,0,0,0,0);
+ person.homeTel = "04525-555512";
+ person.mobile = "07542555125";
+
+ print("Hello " + person.firstName);
+ print(person.fullName);
+ print("Years old: " + person.Age);
+ print(person.contactDetails);
+}
+
+class Person {
+ String _firstName;
+ String _surname;
+ String _homeTel;
+ String _mobile;
+ Date dob;
+
+ void set firstName(String value) {
+    this._firstName = value;
+ }
+
+ void set surname(String value) {
+    this._surname = value;
+ }
+
+ void set homeTel(String value) {
+    this._homeTel = value;
+ }  
+
+ void set mobile(String value) {
+    this._mobile = value;
+ }   
+
+ String get firstName {
+    return this._firstName;
+ }  
+
+ String get surname {
+    return this._surname;
+ }   
+
+ String get homeTel {
+    return this._homeTel;
+ }   
+
+ String get mobile {
+    return this._mobile;
+ }     
+
+ String get fullName {
+    return this._firstName + " " + this._surname;
+ }
+
+ String get contactDetails {
+    String tmp;
+    tmp = "Home Tel: " + this._homeTel + "\n";
+    tmp += "Mobile Tel: " + this._mobile + "\n";
+    return tmp;
+ }  
+
+  int get Age {
+    DateTime now = new DateTime.now();
+    //return int.parse( (now-this.dob).toString().substring(0,2) );
+    Duration diff = now.difference(this.dob);
+    return diff.inDays ~/ 365;
+  }
+}
+</pre>
+
+<p>You can see from the example above that we are able to get the Persons full name. If we always using this class for all of our Persons (I did it again) 
+    then we can allow our "Views" to take advantage of this.
+</p>
+
+<p>A thing to note about age is that this is only an example and this code does not work in all cases. It turns out that working out someones age is complicated.
+    Due to leap years you can not make the assumption that: 13140 = 36 / 365 = Age * DaysInYear;<br />
+    For more details checkout the following <a href="http://stackoverflow.com/questions/9/how-do-i-calculate-someones-age-in-c">Stack Overflow topic - How do I calculate someones age</a>
+</p>
+
+<h2>Views</h2>
+<p>A View is simply what the user of your system will see. This will normally be a website however it could be a mobile app, desktop app or even a TV Widget!</p>

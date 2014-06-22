@@ -2,7 +2,7 @@
 
     describe('plugins/router', function () {
         it('Standard routeStringToRegExp', function () {
-
+            console.info(router);
             var value = router.routeStringToRegExp("testyou");
             expect((value).toString()).toBe("/^testyou$/");
         });
